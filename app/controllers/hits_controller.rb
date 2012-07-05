@@ -19,7 +19,15 @@ class HitsController < ApplicationController
     @hit.code = params[:code] || ''
 
     @hit.save!
-    send_file Rails.root.join('app/assets/images/spacer.gif'), :disposition => 'inline'
+    return_type = params[:type] || 'img'
+    
+    if return_type == 'img'
+      send_file Rails.root.join('app/assets/images/spacer.gif'), :disposition => 'inline'
+    end
+    
+    if return_type == 'css'
+      send_file Rails.root.join('app/assets/stylesheets/blank.css'), :disposition => 'inline'
+    end
   end
 
   def clear
