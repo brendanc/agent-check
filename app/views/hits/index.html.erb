@@ -7,6 +7,7 @@
     <th>Referrer</th>
     <th>Code</th>
     <th>Created At</th>
+    <th>Headers</th>
   </tr>
 
 <% @hits.each do |hit| %>
@@ -16,6 +17,7 @@
     <td><%= hit.referrer %></td>
     <td><%= hit.code %></td>
     <td><%= hit.created_at %></td>
+    <td><%= hit.all_headers.html_safe %><td>
   </tr>
 <% end %>
 </table>

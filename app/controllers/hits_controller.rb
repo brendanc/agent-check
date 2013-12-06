@@ -17,7 +17,12 @@ class HitsController < ApplicationController
     @hit.agent = request.env['HTTP_USER_AGENT'] || ''
     @hit.referrer = request.env["HTTP_REFERER"] || ''
     @hit.code = params[:code] || ''
-
+    @hit.all_headers = ''
+    request.env.each do |header|
+      key = header[0]
+      val = header[1].to_s
+      @hit.all_headers << key + " :: " + val + "<br />"
+    end
     @hit.save!
     return_type = params[:type] || 'img'
     
