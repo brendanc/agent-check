@@ -5,7 +5,7 @@ AgentCheck::Application.routes.draw do
   get 'hits/index'
   get 'hits/create'
   get 'hits/clear'
-  match '/hits' => 'hits#index'
+  get 'hits' => 'hits#index'
 
   #Root:
   root :to => "hits#index"
