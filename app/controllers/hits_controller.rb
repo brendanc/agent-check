@@ -1,4 +1,7 @@
 class HitsController < ApplicationController
+
+before_filter :set_cache_headers
+
   # GET /hits
   # GET /hits.json
   def index
@@ -25,6 +28,14 @@ class HitsController < ApplicationController
     end
     @hit.save!
     return_type = params[:type] || 'img'
+
+    if return_type == '503'
+      # return a 503 here
+    end
+
+    if return_type == '404'
+      # return a 404 here
+    end
     
     if return_type == 'img'
       send_file Rails.root.join('app/assets/images/spacer.gif'), :disposition => 'inline'
@@ -39,4 +50,12 @@ class HitsController < ApplicationController
     Hit.destroy_all
     redirect_to(:action => 'index', :notice => 'Hits were successfully cleared.')
   end
+
+  private
+    def set_cache_headers
+      response.headers["Expires"] = ""
+      response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0, post-check=0, pre-check=0"
+      response.headers["Pragma"] = "no-cache"
+    end
+
 end
