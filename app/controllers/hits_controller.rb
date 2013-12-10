@@ -15,6 +15,7 @@ before_filter :set_cache_headers
 
 
   def create
+    response.headers["content-length"] = "0"
     @hit = Hit.new
     @hit.ip =  request.remote_ip || ''
     @hit.agent = request.env['HTTP_USER_AGENT'] || ''
@@ -55,8 +56,7 @@ before_filter :set_cache_headers
     def set_cache_headers
       response.headers["Expires"] = ""
       response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0, post-check=0, pre-check=0"
-      response.headers["Pragma"] = "no-cache"
-      response.headers["content-length"] = "0"
+      response.headers["Pragma"] = "no-cache"     
     end
 
 end
