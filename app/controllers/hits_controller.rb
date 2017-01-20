@@ -16,6 +16,9 @@ before_filter :set_cache_headers
 
   def create
     response.headers["content-length"] = "0"
+
+    cookies.permanent[:hitCount] = cookies[:hitCount].to_i + 1
+
     @hit = Hit.new
     @hit.ip =  request.remote_ip || ''
     @hit.agent = request.env['HTTP_USER_AGENT'] || ''
