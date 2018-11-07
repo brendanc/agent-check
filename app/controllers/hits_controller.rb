@@ -1,6 +1,6 @@
 class HitsController < ApplicationController
 
-before_filter :set_cache_headers
+before_action :set_cache_headers
 
   # GET /hits
   # GET /hits.json
@@ -27,7 +27,7 @@ before_filter :set_cache_headers
     @hit.all_headers = ''
     request.env.each do |header|      
       key = header[0]
-      if key.starts_with('rack') || key.starts_with('action')
+      if key.start_with?('rack') || key.start_with?('action')
         next
       end
       val = header[1].to_s

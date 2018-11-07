@@ -1,14 +1,15 @@
 source 'https://rubygems.org'
 
 ruby '2.4.3'
-gem 'rails', '4.0.0'
+gem 'rails', '5.2.1'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
 gem 'thin'
-gem 'protected_attributes'
+
+
 
 group :development, :test do
 	gem 'sqlite3'
@@ -25,8 +26,6 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 end
-
-gem 'jquery-rails'
 
 group :production do
   gem 'rails_log_stdout',           github: 'heroku/rails_log_stdout'
