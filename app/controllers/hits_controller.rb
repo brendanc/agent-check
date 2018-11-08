@@ -15,8 +15,6 @@ before_action :set_cache_headers
 
 
   def create
-    response.headers["content-length"] = "0"
-
     cookies.permanent[:hitCount] = cookies[:hitCount].to_i + 1
 
     @hit = Hit.new
@@ -34,7 +32,7 @@ before_action :set_cache_headers
       @hit.all_headers << key + " :: " + val + "<br />"
     end
     @hit.save!
-    return_type = params[:t] || 'img'
+    return_type = params[:t] 
     puts params
     puts return_type
     if return_type == '503'
@@ -46,12 +44,17 @@ before_action :set_cache_headers
     end
     
     if return_type == 'img'
-      send_file Rails.root.join('app/assets/images/spacer.gif'), :disposition => 'inline'
+      send_file Rails.root.join('app/assets/images/litmus-icon.png'), :disposition => 'inline'
+      return
     end
     
     if return_type == 'css'
       send_file Rails.root.join('app/assets/stylesheets/blank.css'), :disposition => 'inline'
+      return
     end
+
+    # default to blank 1x1 gif
+    send_file Rails.root.join('app/assets/images/spacer.gif'), :disposition => 'inline'
   end
 
   def clear
