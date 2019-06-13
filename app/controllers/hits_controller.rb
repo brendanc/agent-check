@@ -54,6 +54,11 @@ before_action :set_cache_headers
       return
     end
 
+    if return_type = 'dyn'
+      dynamic_image
+      return
+    end
+
     # default to blank 1x1 gif
     send_file Rails.root.join('app/assets/images/spacer.gif'), :disposition => 'inline'
   end
@@ -64,8 +69,9 @@ before_action :set_cache_headers
   end
 
   def dynamic_image
-    @kit = IMGKit.new('hello world')
-    send_data(@kit.to_jpg, :type => "image/jpeg", :disposition => 'inline')
+    t = Time.now
+    kit = IMGKit.new('Hello world!  CUrrent server time = ' + t.to_s)
+    send_data(kit.to_jpg, :type => "image/jpeg", :disposition => 'inline')
   end
 
   private
