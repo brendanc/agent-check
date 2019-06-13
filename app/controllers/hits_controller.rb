@@ -70,7 +70,7 @@ before_action :set_cache_headers
 
   def dynamic_image
     t = Time.now
-    kit = IMGKit.new('Hello world!  CUrrent server time = ' + t.to_s)
+    kit = IMGKit.new('Hello world!  Current server time = ' + t.to_s)
     send_data(kit.to_jpg, :type => "image/jpeg", :disposition => 'inline')
   end
 
