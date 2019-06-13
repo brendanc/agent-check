@@ -13,11 +13,11 @@
 
 ActiveRecord::Schema.define(version: 20131206161156) do
 
-  create_table "hits", force: true do |t|
-    t.string   "agent"
-    t.string   "ip"
-    t.string   "referrer"
-    t.string   "code"
+  create_table "hits", force: :cascade do |t|
+    t.string   "agent",       limit: 255
+    t.string   "ip",          limit: 255
+    t.string   "referrer",    limit: 255
+    t.string   "code",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "all_headers"
