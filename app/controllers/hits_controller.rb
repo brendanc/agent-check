@@ -63,6 +63,11 @@ before_action :set_cache_headers
     redirect_to(:action => 'index', :notice => 'Hits were successfully cleared.')
   end
 
+  def dynamic_image
+    @kit = IMGKit.new('hello world')
+    send_data(@kit.to_jpg, :type => "image/jpeg", :disposition => 'inline')
+  end
+
   private
     def set_cache_headers
       response.headers["Expires"] = ""

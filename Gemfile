@@ -8,6 +8,8 @@ gem 'rails', '5.2.1'
 
 gem 'pg'
 gem 'thin'
+gem 'imgkit'
+gem 'wkhtmltoimage-binary'
 
 
 
