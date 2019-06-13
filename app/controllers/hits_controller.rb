@@ -31,7 +31,6 @@ before_action :set_cache_headers
       val = header[1].to_s
       @hit.all_headers << key + " :: " + val + "<br />"
     end
-    @hit.all_headers << requst.user_agent
     @hit.save!
     return_type = params[:t] 
     puts params
