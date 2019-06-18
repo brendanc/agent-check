@@ -53,10 +53,31 @@ before_action :set_cache_headers
       return
     end
 
-    if return_type = 'dyn'
+    if return_type == 'dyn'
       dynamic_image
       return
     end
+
+    if return_type == 'eng'
+      redirects = params[:r]
+      puts "redirects = " + redirects.to_s
+      if redirects.to_s.length > 10
+        dynamic_image
+        return
+      else
+        redirects_param = ''
+        if redirects.to_s.length == 0
+          redirects_param = '&r=0'
+        else
+          redirects_param = '0'
+        end
+        url = request.original_url + redirects_param 
+        redirect_to url
+        return
+      end
+
+    end
+
 
     # default to blank 1x1 gif
     send_file Rails.root.join('app/assets/images/spacer.gif'), :disposition => 'inline'
