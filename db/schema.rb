@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2013_12_06_161156) do
+ActiveRecord::Schema.define(version: 2019_10_05_164712) do
 
   create_table "hits", force: :cascade do |t|
     t.string "agent", limit: 255
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2013_12_06_161156) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text "all_headers"
+    t.string "path"
   end
 
 end

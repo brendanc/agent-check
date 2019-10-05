@@ -22,6 +22,7 @@ before_action :set_cache_headers
     @hit.agent = request.env['HTTP_USER_AGENT'] || ''
     @hit.referrer = request.env["HTTP_REFERER"] || ''
     @hit.code = params[:code] || ''
+    @hit.path = request.env["ORIGINAL_FULLPATH"] || ''
     @hit.all_headers = ''
     request.env.each do |header|      
       key = header[0]
