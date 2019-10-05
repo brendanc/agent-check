@@ -10,6 +10,7 @@ gem 'pg'
 gem 'thin'
 gem 'imgkit'
 gem 'wkhtmltoimage-binary'
+gem "nokogiri", ">= 1.10.4"
 
 
 
