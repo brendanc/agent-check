@@ -15,7 +15,10 @@ before_action :set_cache_headers
 
 
   def create
-    cookies.permanent[:hitCount] = cookies[:hitCount].to_i + 1
+    use_cookie = params[:cook]
+    if use_cookie != 'no'
+      cookies.permanent[:hitCount] = cookies[:hitCount].to_i + 1
+    end
 
     @hit = Hit.new
     @hit.ip =  request.remote_ip || ''
