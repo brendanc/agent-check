@@ -45,12 +45,12 @@ before_action :set_cache_headers
     end
     
     if return_type == 'img'
-      send_file Rails.root.join('app/assets/images/litmus-icon.png'), :disposition => 'inline'
+      send_file Rails.root.join('app/assets/images/litmus-icon.png'), :type => "image/png",:disposition => 'inline'
       return
     end
     
     if return_type == 'css'
-      send_file Rails.root.join('app/assets/stylesheets/blank.css'), :disposition => 'inline'
+      send_file Rails.root.join('app/assets/stylesheets/blank.css'), :type => "text/css",:disposition => 'inline'
       return
     end
 
@@ -82,7 +82,7 @@ before_action :set_cache_headers
 
 
     # default to blank 1x1 gif
-    send_file Rails.root.join('app/assets/images/spacer.gif'), :disposition => 'inline'
+    send_file Rails.root.join('app/assets/images/spacer.gif'), :type => "image/gif", :disposition => 'inline'
   end
 
   def clear
