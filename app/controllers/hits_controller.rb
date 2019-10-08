@@ -48,7 +48,8 @@ before_action :set_cache_headers
     end
     
     if return_type == 'img'
-      send_file_with_content_length Rails.root.join('public/images/litmus-icon.png'), :type => "image/png",:disposition => 'inline'
+      # send_file_with_content_length Rails.root.join('public/images/litmus-icon.png'), :type => "image/png",:disposition => 'inline'
+      redirect_image
       return
     end
     
@@ -97,6 +98,10 @@ before_action :set_cache_headers
     t = Time.now
     kit = IMGKit.new('Hello world!  Current server time = ' + t.to_s)
     send_data(kit.to_jpg, :type => "image/jpeg", :disposition => 'inline')
+  end
+
+  def redirect_image
+    redirect_to '/images/litmus-icon.png'
   end
 
   private
