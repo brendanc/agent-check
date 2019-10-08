@@ -45,7 +45,7 @@ before_action :set_cache_headers
     end
     
     if return_type == 'img'
-      send_file Rails.root.join('public/images/litmus-icon.png'), :type => "image/png",:disposition => 'inline'
+      send_file_with_content_length Rails.root.join('public/images/litmus-icon.png'), :type => "image/png",:disposition => 'inline'
       return
     end
     
@@ -98,9 +98,15 @@ before_action :set_cache_headers
 
   private
     def set_cache_headers
-      # response.headers["Expires"] = ""
-      # response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0, post-check=0, pre-check=0"
-      # response.headers["Pragma"] = "no-cache"     
+      response.headers["Expires"] = ""
+      response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0, post-check=0, pre-check=0"
+      response.headers["Pragma"] = "no-cache"     
     end
+
+    def send_file_with_content_length(path, options = {})
+      headers['Content-Length'] = File.size(path).to_s
+      send_file(path, options)      
+    end
+
 
 end
