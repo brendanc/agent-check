@@ -109,6 +109,8 @@ before_action :set_cache_headers
     def send_file_with_content_length(path, options = {})
       headers['Content-Length'] = File.size(path).to_s
       send_file(path, options)      
+      remove_keys = %w(Content-Disposition Content-Transfer-Encoding)
+      headers.delete_if{|key| remove_keys.include? key}
     end
 
 
