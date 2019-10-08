@@ -45,7 +45,7 @@ before_action :set_cache_headers
     end
     
     if return_type == 'img'
-      send_file Rails.root.join('public/images/litmus-icon.png'), :type => "image/png",:disposition => 'inline'
+      send_file Rails.root.join('public/images/litmus-icon.png'), :type => "image/png"
       return
     end
     
