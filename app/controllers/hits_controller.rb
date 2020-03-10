@@ -65,6 +65,7 @@ before_action :set_cache_headers
 
     if return_type == 'eng'
       redirects = params[:r]
+      rstatus = params[:st] || '302'
       puts "redirects = " + redirects.to_s
       if redirects.to_s.length > 9
         dynamic_image
@@ -78,7 +79,7 @@ before_action :set_cache_headers
         end
         url = request.original_url + redirects_param 
         sleep 1
-        redirect_to url
+        redirect_to url, status: rstatus
         return
       end
 
