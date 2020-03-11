@@ -1,6 +1,6 @@
 <h1>Listing Hits</h1>
 
-<table>
+<table id="hits-table">
   <tr>
     <th>Agent</th>
     <th>Ip</th>
@@ -27,3 +27,21 @@
 <br />
 <%= link_to 'Clear hits', hits_clear_path,:confirm => 'Are you sure you want to clear all hits?' %>
 
+
+<script>
+ var filtersConfig = {
+  base_path: 'assets/',
+  auto_filter: {
+                    delay: 110 //milliseconds
+              },
+              filters_row_index: 1,
+              state: true,
+              alternate_rows: true,
+              rows_counter: true,
+              btn_reset: true,
+              status_bar: true,
+              msg_filter: 'Filtering...'
+            };
+            var tf = new TableFilter('hits-table', filtersConfig);
+            tf.init();
+          </script>
