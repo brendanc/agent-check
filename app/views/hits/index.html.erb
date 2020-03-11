@@ -1,7 +1,7 @@
 <h1>Listing Hits</h1>
 
 <table id="hits-table">
-  <tr>
+  <thead>
     <th>Agent</th>
     <th>Ip</th>
     <th>Referrer</th>
@@ -9,7 +9,7 @@
     <th>Path</th>
     <th>Created At</th>
     <th>Headers</th>
-  </tr>
+  </thead>
 
 <% @hits.each do |hit| %>
   <tr>
@@ -19,7 +19,7 @@
     <td><%= hit.code %></td>
     <td><%= hit.path %></td>
     <td><%= hit.created_at %></td>
-    <td><%= hit.all_headers.html_safe %><td>
+    <td><div class="large-div"><%= hit.all_headers.html_safe %></div></td>
   </tr>
 <% end %>
 </table>
@@ -35,13 +35,11 @@
                     delay: 110 //milliseconds
               },
               filters_row_index: 1,
-              state: true,
-              alternate_rows: true,
               rows_counter: true,
               btn_reset: true,
               status_bar: true,
               msg_filter: 'Filtering...'
             };
-            var tf = new TableFilter('hits-table', filtersConfig);
+            var tf = new TableFilter('hits-table',filtersConfig);
             tf.init();
           </script>
