@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.6.3'
+ruby '2.6.5'
 gem 'rails', '5.2.3'
 
 # Bundle edge Rails instead:
@@ -10,7 +10,7 @@ gem 'pg'
 gem 'thin'
 gem 'imgkit'
 gem 'wkhtmltoimage-binary'
-gem "nokogiri", ">= 1.10.4"
+gem "nokogiri"
 
 
 

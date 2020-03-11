@@ -151,7 +151,7 @@ PLATFORMS
 
 DEPENDENCIES
   imgkit
-  nokogiri (>= 1.10.4)
+  nokogiri
   pg
   rails (= 5.2.3)
   rails3_serve_static_assets!
@@ -163,7 +163,7 @@ DEPENDENCIES
   wkhtmltoimage-binary
 
 RUBY VERSION
-   ruby 2.6.3p62
+   ruby 2.6.5p114
 
 BUNDLED WITH
    1.17.3
