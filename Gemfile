@@ -1,13 +1,12 @@
 source 'https://rubygems.org'
 
 ruby '2.6.5'
-gem 'rails', '5.2.4.3'
+gem 'rails', '6.1.3.2'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
-gem 'thin'
 gem 'imgkit'
 gem 'wkhtmltoimage-binary'
 gem "nokogiri"
