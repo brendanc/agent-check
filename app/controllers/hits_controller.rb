@@ -1,6 +1,7 @@
 class HitsController < ApplicationController
 
-before_action :set_cache_headers
+before_action -> {set_cache_headers},
+                  only: [:create, :dynamic_image, :long_cache_image]
 
   # GET /hits
   # GET /hits.json
@@ -20,6 +21,7 @@ before_action :set_cache_headers
       cookies.permanent[:hitCount] = cookies[:hitCount].to_i + 1
     end
 
+    long_cache = params[:long_cache] == "true"
     @hit = Hit.new
     @hit.ip =  request.remote_ip || ''
     @hit.agent = request.env['HTTP_USER_AGENT'] || ''
@@ -47,6 +49,11 @@ before_action :set_cache_headers
        raise ActionController::RoutingError.new('Not Found')
     end
     
+    if return_type == 'img' and long_cache == true
+      long_cache_image
+      return
+    end
+
     if return_type == 'img'
       # send_file_with_content_length Rails.root.join('public/images/litmus-icon.png'), :type => "image/png",:disposition => 'inline'
       redirect_image
@@ -102,6 +109,12 @@ before_action :set_cache_headers
     send_data(kit.to_jpg, :type => "image/jpeg", :disposition => 'inline')
   end
 
+  def long_cache_image
+    t = Time.now
+    kit = IMGKit.new('Hello LONG CACHE world!  Current server time = ' + t.to_s)
+    send_data(kit.to_jpg, :type => "image/jpeg", :disposition => 'inline')
+  end
+
   def redirect_image
     redirect_to '/images/litmus-icon.png'
   end
@@ -123,10 +136,18 @@ before_action :set_cache_headers
   end
 
   private
-    def set_cache_headers
-      response.headers["Expires"] = "Mon, 01 Jan 2021 00:00:00 GMT"
-      response.headers["Cache-Control"] = "private, max-age=30"
-      response.headers["Pragma"] = "no-cache"     
+    def set_cache_headers()
+      lc = params[:long_cache] == "true"
+      puts 'in cache headers'
+      puts 'long_cache = ' + lc.to_s
+      if not lc
+        response.headers["Expires"] = "Mon, 01 Jan 2021 00:00:00 GMT"
+        response.headers["Cache-Control"] = "private, max-age=30"
+        response.headers["Pragma"] = "no-cache"     
+      else
+        response.headers["Expires"] = "Mon, 01 Jan 2022 00:00:00 GMT"
+        response.headers["Cache-Control"] = "max-age=30000000"
+      end
     end
 
     def send_file_with_content_length(path, options = {})
