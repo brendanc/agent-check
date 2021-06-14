@@ -106,6 +106,22 @@ before_action :set_cache_headers
     redirect_to '/images/litmus-icon.png'
   end
 
+  def destroy
+    Hit.find(params[:id]).destroy
+    respond_to do |format|
+
+      format.html do
+        redirect_to root_path, notice: "Hit was successfully deleted."
+      end
+
+      format.json do
+        @hits = Hit.order("created_at DESC").all
+        render json: @hits.all
+      end
+
+    end
+  end
+
   private
     def set_cache_headers
       response.headers["Expires"] = "Mon, 01 Jan 2021 00:00:00 GMT"

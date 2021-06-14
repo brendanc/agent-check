@@ -7,6 +7,7 @@ AgentCheck::Application.routes.draw do
   get 'hits/clear'
   get 'hits/dyn' => 'hits#dynamic_image'
   get 'hits' => 'hits#index'
+  post 'hits/delete/:id' => 'hits#destroy'
 
   #Root:
   root :to => 'hits#index'
