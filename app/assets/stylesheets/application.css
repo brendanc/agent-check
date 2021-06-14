@@ -12,6 +12,11 @@
  *= require_tree .
  */
 
+.container {
+	margin-left: 0px;
+	margin-right: opx;;
+}
+
 .large-div {
 	height:100px;
 	max-width: 500px;
