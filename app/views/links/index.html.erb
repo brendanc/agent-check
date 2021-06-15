@@ -7,6 +7,7 @@
         <th>Slug</th>
         <th>CreatedAt</th>
         </thead>
+    <tbody>
     <% @links.each do |link| %>
     <tr>
         <td><%= link.id %></td>
@@ -15,5 +16,6 @@
         <td><%= link.created_at %></td>
     </tr>
     <% end %>
+    </tbody>
     </table>
 </div>

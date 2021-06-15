@@ -75,8 +75,15 @@ $(document).on('click','.add-link', function() {
         type: 'POST',
         url: '/links/new/',
         data: {url: linkUrl},
-        success: function(){
-            alert('yes');
+        dataType: 'json',
+        success: function(data){
+           console.log(data);
+           $('#links-table').find('tbody')
+            .prepend('<tr><td>' + data.id + '</td>'
+            + '<td>' + data.url + '</td>'
+            + '<td>' + data.slug + '</td>'
+            + '<td>' + data.created_at + '</td>'
+            + '</tr>');
         }
         });
 });

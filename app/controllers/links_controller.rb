@@ -17,11 +17,9 @@ class LinksController < HitsController
         @link.slug = newSlug
         @link.save!   
 
-        @links = Link.order("created_at DESC").all
-
         respond_to do |format|
             format.json do
-                render json: @links
+                render json: @link
             end
         end
     end
