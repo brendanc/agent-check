@@ -1,3 +1,6 @@
+/** 
+ * BEGIN HITS SEARCH/FILTER
+ */
 (function(document) {
     'use strict';
 
@@ -35,7 +38,13 @@
     });
 
 })(document);
+/** 
+ * END HITS SEARCH/FILTER
+ */
 
+/** 
+ * BEGIN DELETE HITS
+ */
 $(document).on('click','.delete-hit', function() {
 var hitId = $(this).attr('data-hit-id'); 
 $.ajax({
@@ -46,3 +55,31 @@ success: function(){
 }
 });
 });
+
+/** 
+ * END DELETE HITS
+ */
+
+ /** 
+ * BEGIN ADD LINK
+ */
+$(document).on('click','.add-link', function() {
+    let linkUrl = prompt('Enter a url to create a link for:');
+    let isConfirmed = confirm('Are you sure you want to create a link for ' + linkUrl + ' ?');
+    if(!isConfirmed)
+    {
+        return;
+    }
+
+    $.ajax({
+        type: 'POST',
+        url: '/links/new/',
+        data: {url: linkUrl},
+        success: function(){
+            alert('yes');
+        }
+        });
+});
+  /** 
+ * END ADD LINK
+ */

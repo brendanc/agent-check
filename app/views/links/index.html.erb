@@ -1,0 +1,19 @@
+<div class="container">
+    <button class="add-link">Add New Link</button>
+    <table class="table table-striped mt32 links-table" id="links-table">
+       <thead>
+        <th>Id</th>
+        <th>Url</th>
+        <th>Slug</th>
+        <th>CreatedAt</th>
+        </thead>
+    <% @links.each do |link| %>
+    <tr>
+        <td><%= link.id %></td>
+        <td><%= link.url %></td>
+        <td><%= link.slug %></td>
+        <td><%= link.created_at %></td>
+    </tr>
+    <% end %>
+    </table>
+</div>

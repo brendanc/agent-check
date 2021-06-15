@@ -18,7 +18,7 @@ before_action -> {set_cache_headers},
   def create
     # save the hit data
     puts params
-    save_hit
+    save_hit(nil)
 
     # figure out what to return
     use_cookie = params[:cook]
@@ -123,7 +123,9 @@ before_action -> {set_cache_headers},
   end
 
   protected
-  def save_hit
+  def save_hit(link)
+    l = link.nil? ? 'nil' : link.url
+    puts "in save_hit and link = " + l
     @hit = Hit.new
     @hit.ip =  request.remote_ip || ''
     @hit.agent = request.env['HTTP_USER_AGENT'] || ''
@@ -138,6 +140,9 @@ before_action -> {set_cache_headers},
       end
       val = header[1].to_s
       @hit.all_headers << key + " :: " + val + "<br />"
+    end
+    unless link.nil?
+      @hit.link = link
     end
     @hit.save!
   end

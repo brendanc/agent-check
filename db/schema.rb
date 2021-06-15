@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_05_164712) do
+ActiveRecord::Schema.define(version: 2021_06_15_202050) do
 
   create_table "hits", force: :cascade do |t|
     t.string "agent"
@@ -21,6 +21,15 @@ ActiveRecord::Schema.define(version: 2019_10_05_164712) do
     t.datetime "updated_at", null: false
     t.text "all_headers"
     t.string "path"
+    t.integer "link_id"
+    t.index ["link_id"], name: "index_hits_on_link_id"
+  end
+
+  create_table "links", force: :cascade do |t|
+    t.string "slug"
+    t.string "url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
 end
