@@ -16,30 +16,17 @@ before_action -> {set_cache_headers},
 
 
   def create
+    # save the hit data
+    puts params
+    save_hit
+
+    # figure out what to return
     use_cookie = params[:cook]
     if use_cookie != 'no'
       cookies.permanent[:hitCount] = cookies[:hitCount].to_i + 1
     end
-
     long_cache = params[:long_cache] == "true"
-    @hit = Hit.new
-    @hit.ip =  request.remote_ip || ''
-    @hit.agent = request.env['HTTP_USER_AGENT'] || ''
-    @hit.referrer = request.env["HTTP_REFERER"] || ''
-    @hit.code = params[:code] || ''
-    @hit.path = request.env["ORIGINAL_FULLPATH"] || ''
-    @hit.all_headers = ''
-    request.env.each do |header|      
-      key = header[0]
-      if key.start_with?('rack') || key.start_with?('action')
-        next
-      end
-      val = header[1].to_s
-      @hit.all_headers << key + " :: " + val + "<br />"
-    end
-    @hit.save!
     return_type = params[:t] 
-    puts params
     puts return_type
     if return_type == '503'
       render :status => 503
@@ -133,6 +120,26 @@ before_action -> {set_cache_headers},
       end
 
     end
+  end
+
+  protected
+  def save_hit
+    @hit = Hit.new
+    @hit.ip =  request.remote_ip || ''
+    @hit.agent = request.env['HTTP_USER_AGENT'] || ''
+    @hit.referrer = request.env["HTTP_REFERER"] || ''
+    @hit.code = params[:code] || ''
+    @hit.path = request.env["ORIGINAL_FULLPATH"] || ''
+    @hit.all_headers = ''
+    request.env.each do |header|      
+      key = header[0]
+      if key.start_with?('rack') || key.start_with?('action')
+        next
+      end
+      val = header[1].to_s
+      @hit.all_headers << key + " :: " + val + "<br />"
+    end
+    @hit.save!
   end
 
   private
