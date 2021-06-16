@@ -1,7 +1,7 @@
 AgentCheck::Application.routes.draw do
 
   # misc
-  get 'current/ip'
+  get 'ip' => 'current#ip'
   get 'email' => 'email#index'
 
   # hits

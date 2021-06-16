@@ -11,6 +11,7 @@ gem 'imgkit'
 gem 'wkhtmltoimage-binary'
 gem "nokogiri"
 gem "rack", ">= 2.1.4"
+gem 'geocoder'
 
 
 
