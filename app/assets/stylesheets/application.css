@@ -17,6 +17,10 @@
 	margin-right: opx;;
 }
 
+.main-container {
+	margin-bottom: 55px; /* Need this to offset the fixed bottom nav */
+}
+
 .large-div {
 	height:100px;
 	max-width: 500px;
