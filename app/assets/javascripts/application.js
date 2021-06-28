@@ -90,3 +90,40 @@ $(document).on('click','.add-link', function() {
   /** 
  * END ADD LINK
  */
+
+ /**
+  * BEGIN CUSTOMIZE SAMPLE EMAIL
+  */
+
+function swapEmailValue(tag, newValue)
+{
+    var email = $('#sampleEmail').text();
+    var r = ''; // regex
+    var v = '' // replace value
+    if(tag == 't')
+    {
+        r = /t=(img|dyn|eng|css)/g;
+        v = 't=' + newValue;
+    }
+    else
+    {
+        r = /code=.*\"/g;
+        v = 'code=' + newValue + '"';
+    }
+    console.log(email);
+    var newEmail = email.replaceAll(r,v);
+    console.log(newEmail);
+    $('#sampleEmail').text(newEmail);
+}
+
+$(document).on('change','#assetType',function(){
+    swapEmailValue('t',$('#assetType').val());
+});
+
+$(document).on('input','#assetCode',function(){
+    console.log('in change');
+    swapEmailValue('code',$('#assetCode').val());
+});
+   /**
+  * END CUSTOMIZE SAMPLE EMAIL
+  */
