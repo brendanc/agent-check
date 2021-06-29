@@ -110,9 +110,8 @@ function swapEmailValue(tag, newValue)
         r = /code=.*\"/g;
         v = 'code=' + newValue + '"';
     }
-    console.log(email);
+
     var newEmail = email.replaceAll(r,v);
-    console.log(newEmail);
     $('#sampleEmail').text(newEmail);
 }
 
@@ -127,3 +126,42 @@ $(document).on('input','#assetCode',function(){
    /**
   * END CUSTOMIZE SAMPLE EMAIL
   */
+
+/**
+ * BEGIN MAKE EMAIL COPYABLE
+ */
+
+$(document).ready(function(){
+
+    var copyText = 'Click to copy. <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/></svg>';
+    $('#sampleEmail').mouseenter(function() {
+        $('.hoverText').html(copyText);
+        $('.hoverText').css("visibility","visible");
+      });
+      
+      $('#sampleEmail').mouseout(function() {
+        $('.hoverText').css("visibility","hidden");
+      });
+
+    $('#sampleEmail').on('ready').append('<span class="command-copy" ><i class="fa fa-clipboard" aria-hidden="true"></i></span>');
+
+    $('#sampleEmail').click(function(e) {
+        var text = $(this).parent().text().trim();
+        var cleanText = text.replace(/\n/g, "")
+        .replace(/[\t ]+\</g, "<")
+        .replace(/\>[\t ]+\</g, "><")
+        .replace(/\>[\t ]+$/g, ">")
+        .replace('Click to copy.','');
+        var copyHex = document.createElement('input');
+        copyHex.value = cleanText;
+        document.body.appendChild(copyHex);
+        copyHex.select();
+        document.execCommand('copy');
+        document.body.removeChild(copyHex);
+        $('.hoverText').text('Copied!');
+      });
+});
+
+ /**
+ * END MAKE EMAIL COPYABLE
+ */

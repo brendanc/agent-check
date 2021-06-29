@@ -39,3 +39,15 @@ h3 input.search-input {
 .mt32 {
 	margin-top: 32px;
 }
+
+.hoverWrapper span{
+	position:relative;
+	bottom:125px;
+	left:450px;
+	color:white;
+	visibility: hidden;
+}
+
+.hoverWrapper pre:hover{
+	background-color: gray;
+}
