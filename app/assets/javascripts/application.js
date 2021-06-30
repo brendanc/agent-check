@@ -105,6 +105,19 @@ function swapEmailValue(tag, newValue)
         r = /t=(img|dyn|eng|css)/g;
         v = 't=' + newValue;
     }
+    else if (tag == 'cache')
+    {
+        if(newValue)
+        {
+            r = /\?t=/g;
+            v = '?long_cache=true&t=';
+        }
+        else
+        {
+            r = /long_cache=true&/g;
+            v = '';
+        }
+    }
     else
     {
         r = /code=.*\"/g;
@@ -120,8 +133,12 @@ $(document).on('change','#assetType',function(){
 });
 
 $(document).on('input','#assetCode',function(){
-    console.log('in change');
     swapEmailValue('code',$('#assetCode').val());
+});
+
+$(document).on('change','#longCacheCheck',function(){
+    var checked = $('#longCacheCheck')[0].checked;
+    swapEmailValue('cache',checked);
 });
    /**
   * END CUSTOMIZE SAMPLE EMAIL
